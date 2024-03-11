@@ -69,5 +69,43 @@ public class Student extends Person {
     public void setStudentId(String studentId) {
         this.studentId = studentId;
     }
+    public static void searchStudentsByName(String substring) {
+        boolean found = false;
+        for (Student student : students) {
+            String studentName = student.getFullName().trim(); // Trim leading and trailing spaces
+            if (!studentName.isEmpty() && !studentName.equals(" ") && studentName.toLowerCase().contains(substring.toLowerCase())) {
+                System.out.println("Student ID: " + student.getStudentId() + ", Student Name: " + student.getFullName());
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No instructors found with the provided substring("+substring+").");
+        }
+    }
+    private ArrayList<String> enrolledSubjectIds = new ArrayList<>(); // Store enrolled subject IDs
+
+    // Existing constructors...
+
+    // Method to enroll a subject
+    public void enrollSubject(String subjectId) {
+        enrolledSubjectIds.add(subjectId);
+    }
+
+    // Method to remove enrollment from a subject
+    public void removeSubject(String subjectId) {
+        enrolledSubjectIds.remove(subjectId);
+    }
+
+    // Method to get total number of enrolled subjects
+    public int getTotalEnrolledSubjects() {
+        return enrolledSubjectIds.size();
+    }
+
+    // Getter for enrolledSubjectIds
+    public ArrayList<String> getEnrolledSubjectIds() {
+        return enrolledSubjectIds;
+    }
+
+
 }
 

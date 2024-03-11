@@ -71,4 +71,18 @@ public class Instructor extends Person {
     public static void addInstructor(Instructor instructor) {
         instructors.add(instructor);
     }
+    public static void searchInstructorsByName(String substring) {
+        boolean found = false;
+        for (Instructor instructor : instructors) {
+            String instructorName = instructor.getFullName().trim(); // Trim leading and trailing spaces
+            if (!instructorName.isBlank() && instructorName.toLowerCase().contains(substring.toLowerCase())) {
+                System.out.println("Instructor ID: " + instructor.getInstructorId() + ", Instructor Name: " + instructor.getFullName());
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No instructors found with the provided substring("+substring+").");
+        }
+    }
+
 }

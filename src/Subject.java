@@ -3,6 +3,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Subject {
+    final public int maxStudentEnrolled = 30;
+    final public int maxAssignedSubject = 8;
     private boolean hasTeacher = false;
     private String name;
     private String code;
@@ -105,6 +107,7 @@ public class Subject {
     public Instructor getInstructor() {
         return instructor;
         }
+
     public Boolean hasTeacher(){
         if(instructor!=null) {
             this.hasTeacher = hasTeacher;
@@ -114,8 +117,7 @@ public class Subject {
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
     }
-
-    public List<Student> getEnrolledStudents() {
+     List<Student> getEnrolledStudents() {
         return enrolledStudents;
     }
 
@@ -123,48 +125,119 @@ public class Subject {
         this.enrolledStudents = enrolledStudents;
     }
 
-    // Other methods related to subject management
+
 
     public void enrollStudent(Student student) {
         enrolledStudents.add(student);
     }
 
-
+    public void displayEnrolledStudents() {
+        System.out.println("Enrolled Students for " + name + " (" + subjectId + "):");
+        if (enrolledStudents.isEmpty()) {
+            System.out.println("No students enrolled.");
+        } else {
+            System.out.println("+------------------------------------------------------+");
+            System.out.println("| Student ID   | Name                                  |");
+            System.out.println("+------------------------------------------------------+");
+            for (Student student : enrolledStudents) {
+                String studentId = student.getStudentId();
+                String studentName = student.getFullName();
+                // Truncate strings if they exceed column width
+                studentId = truncateString(studentId, 13);
+                studentName = truncateString(studentName, 37);
+                // Pad the strings to align columns
+                studentId = padString(studentId, 13);
+                studentName = padString(studentName, 37);
+                System.out.println("| " + studentId + "| " + studentName + "|");
+            }
+            System.out.println("+------------------------------------------------------+");
+        }
+    }
     public void unenrollStudent(Student student) {
         enrolledStudents.remove(student);
     }
     public static void displayAllSubjects() {
-        System.out.println("+--------------------------------------+");
-        System.out.println("|          Available Subjects          |");
-        System.out.println("+--------------------------------------+");
-        System.out.println("| Name            | Code   | Description");
-        System.out.println("+--------------------------------------+");
+        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("|                                          Available Subjects                                                              |");
+        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("| Name             | Code     | Description                          | Subject ID   | Instructor     |Enrolled Students    |");
+        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
 
         for (Subject subject : subjects) {
             String name = subject.getName();
             String code = subject.getCode();
             String description = subject.getDescription();
+            String subjectId = subject.getSubjectId();
+            String instructorName = formatInstructorName(subject.getInstructor());
+            int enrolledStudentsCount = subject.getEnrolledStudents().size();
+
+            // Truncate strings if they exceed column width
+            name = truncateString(name, 16);
+            code = truncateString(code, 8);
+            description = truncateString(description, 36);
+            subjectId = truncateString(subjectId, 12);
+            instructorName = truncateString(instructorName, 14); // Adjust the length as needed
 
             // Pad the strings to align columns
             name = padString(name, 16);
             code = padString(code, 8);
             description = padString(description, 36);
+            subjectId = padString(subjectId, 12);
+            instructorName = padString(instructorName, 14); // Adjust the length as needed
 
-            System.out.println("| " + name + " | " + code + " | " + description + " |");
+            // Convert enrolled students count to string and pad it
+            String enrolledStudentsStr = Integer.toString(enrolledStudentsCount);
+            enrolledStudentsStr = padString(enrolledStudentsStr, 18); // Adjust the length as needed
+
+            System.out.println("| " + name + " | " + code + " | " + description + " | " + subjectId + " | " + instructorName + " | " + enrolledStudentsStr + "  |");
         }
 
-        System.out.println("+--------------------------------------+");
+        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
     }
 
+    // Helper method to format instructor's name as "F. LastName"
+    private static String formatInstructorName(Instructor instructor) {
+        if (instructor != null) {
+            String[] nameParts = instructor.getFullName().split(" ");
+            if (nameParts.length >= 2) {
+                return nameParts[0].charAt(0) + ". " + nameParts[nameParts.length - 1];
+            }
+        }
+        return "N/A"; // If no instructor or invalid name format
+    }
+
+    // Helper method to truncate a string if its length exceeds maxLength
+    private static String truncateString(String str, int maxLength) {
+        if (str.length() > maxLength) {
+            return str.substring(0, maxLength - 3) + "...";
+        }
+        return str;
+    }
+
+    // Helper method to pad a string to a specified length
     private static String padString(String str, int length) {
         if (str.length() >= length) {
-            return str.substring(0, length);
+            return str;
         } else {
-            StringBuilder builder = new StringBuilder(str);
-            while (builder.length() < length) {
-                builder.append(" ");
+            StringBuilder paddedStr = new StringBuilder(str);
+            while (paddedStr.length() < length) {
+                paddedStr.append(" ");
             }
-            return builder.toString();
+            return paddedStr.toString();
         }
     }
+    public static void searchSubjectsByName(String substring) {
+        boolean found = false;
+        for (Subject subject : subjects) {
+            String subjectName = subject.getName().trim(); // Trim leading and trailing spaces
+            if (!subjectName.isEmpty() && subjectName.toLowerCase().contains(substring.toLowerCase())) {
+                System.out.println("Subject ID: " + subject.getSubjectId() + ", Subject Name: " + subject.getName());
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("No instructors found with the provided substring("+substring+").");
+        }
+    }
+
 }
