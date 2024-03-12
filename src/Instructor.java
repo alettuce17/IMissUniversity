@@ -84,5 +84,14 @@ public class Instructor extends Person {
             System.out.println("No instructors found with the provided substring("+substring+").");
         }
     }
+    public int getSizeOfAssignedSubjectsForInstructor(Instructor instructor) {
+        int count = 0;
+        for (Subject subject : Subject.subjects) {
+            if (subject.getInstructor() != null && subject.getInstructor().equals(instructor)) {
+                count++;
+            }
+        }
+        return count;
+    }
 
 }

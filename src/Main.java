@@ -5,48 +5,49 @@ public class Main {
 
     static Scanner sc = new Scanner(System.in);
     public static void main(String[] args){
-        // Example usage
-        Instructor instructor1 = new Instructor("John", "Doe", "123 Street", 35);
-        Instructor instructor2 = new Instructor("Jane", "Smith", "456 Avenue", 40);
-
-        // Add instructors to the list
-        Instructor.addInstructor(instructor1);
-        Instructor.addInstructor(instructor2);
-
-        // Search for an instructor by ID
-        String searchId = instructor1.getInstructorId(); // Using the ID of the first instructor
-        Instructor foundInstructor = Instructor.findInstructorById(searchId);
-
-        if (foundInstructor != null) {
-            System.out.println("Instructor found:");
-            System.out.println("Name: " + foundInstructor.getFullName());
-            System.out.println("ID: " + foundInstructor.getInstructorId());
-            System.out.println("Age: " + foundInstructor.getAge());
-            // You can print other details if needed
-        } else {
-            System.out.println("Instructor not found with ID: " + searchId);
-        }
-        Student student1 = new Student("John", "Doe", "123 Street", 35);
-        Student student2 = new Student("Jane", "Smith", "456 Avenue", 40);
-
-        // Add students to the list
-        Student.addStudent(student1);
-
-        Student.addStudent(student2);
-
-        // Search for an student by ID
-        String searchsId = student1.getStudentId(); // Using the ID of the first student
-        Student foundStudent = Student.findStudentById(searchsId);
-
-        if (foundStudent != null) {
-            System.out.println("Student found:");
-            System.out.println("Name: " + foundStudent.getFullName());
-            System.out.println("ID: " + foundStudent.getStudentId());
-            System.out.println("Age: " + foundStudent.getAge());
-            // You can print other details if needed
-        } else {
-            System.out.println("Student not found with ID: " + searchsId);
-        }
+//        // Example usage
+//        Instructor instructor1 = new Instructor("John", "Doe", "123 Street", 35);
+//        Instructor instructor2 = new Instructor("Jane", "Smith", "456 Avenue", 40);
+//
+//        // Add instructors to the list
+//        Instructor.addInstructor(instructor1);
+//        Instructor.addInstructor(instructor2);
+//
+//        // Search for an instructor by ID
+//        String searchId = instructor1.getInstructorId(); // Using the ID of the first instructor
+//        Instructor foundInstructor = Instructor.findInstructorById(searchId);
+//
+//        if (foundInstructor != null) {
+//            System.out.println("Instructor found:");
+//            System.out.println("Name: " + foundInstructor.getFullName());
+//            System.out.println("ID: " + foundInstructor.getInstructorId());
+//            System.out.println("Age: " + foundInstructor.getAge());
+//            // You can print other details if needed
+//        } else {
+//            System.out.println("Instructor not found with ID: " + searchId);
+//        }
+//        Student student1 = new Student("John", "Doe", "123 Street", 35);
+//        Student student2 = new Student("Jane","asd", "Smith", "456 Avenue", 40);
+//
+//
+//        // Add students to the list
+//        Student.addStudent(student1);
+//
+//        Student.addStudent(student2);
+//
+//        // Search for an student by ID
+//        String searchsId = student1.getStudentId(); // Using the ID of the first student
+//        Student foundStudent = Student.findStudentById(searchsId);
+//
+//        if (foundStudent != null) {
+//            System.out.println("Student found:");
+//            System.out.println("Name: " + foundStudent.getFullName());
+//            System.out.println("ID: " + foundStudent.getStudentId());
+//            System.out.println("Age: " + foundStudent.getAge());
+//            // You can print other details if needed
+//        } else {
+//            System.out.println("Student not found with ID: " + searchsId);
+//        }
         System.out.println("\n" +
                 " __          __    _                                _            _____  __  __  _            _    _         _                         _  _          _     \n" +
                 " \\ \\        / /   | |                              | |          |_   _||  \\/  |(_)          | |  | |       (_)                       (_)| |        ( )    \n" +
@@ -63,11 +64,7 @@ public class Main {
                 "  \\____/ |_| |_||_|  \\_/  \\___||_|   |___/|_| \\__| \\__, | |_|  |_| \\__,_||_| |_| \\__,_| \\__, | \\___||_| |_| |_| \\___||_| |_| \\__|                         \n" +
                 "                                                    __/ |                                __/ |                                                            \n" +
                 "  _____               __  _  _  _                  |___/              _                 |___/                                                             \n" +
-                " |  __ \\             / _|(_)| |(What do you want to Search?\n" +
-                "1\n" +
-                "Search student\n" +
-                "Student ID: ST24-6155, Student Name: John Doe\n" +
-                "Student ID: ST24-3318, Student Name: Jane Smith\n)                / ____|            | |                                                                                  \n" +
+                " |  __ \\             / _|(_)| |(_)                / ____|            | |                                                                                  \n" +
                 " | |__) |_ __  ___  | |_  _ | | _  _ __    __ _  | (___   _   _  ___ | |_  ___  _ __ ___                                                                  \n" +
                 " |  ___/| '__|/ _ \\ |  _|| || || || '_ \\  / _` |  \\___ \\ | | | |/ __|| __|/ _ \\| '_ ` _ \\                                                                 \n" +
                 " | |    | |  | (_) || |  | || || || | | || (_| |  ____) || |_| |\\__ \\| |_|  __/| | | | | |                                                                \n" +
@@ -81,17 +78,18 @@ public class Main {
                 System.out.println("┌──────────────────────────────────┐\n" +
                         "│__________________________________│\n" +
                         "│     Main                         │\n" +
-                        "│+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-│");
-                System.out.println("│1. Add                            │");
-                System.out.println("│2. Edit                           │");
-                System.out.println("│3. Delete                         │");
-                System.out.println("│4. Search                         │");
-                System.out.println("│5. Display                        │");
-                System.out.println("│6. Enroll a Student               │");
-                System.out.println("│7. Assign Instructor to a subject │");
-                System.out.println("│8. Exit                           │");
-                System.out.println("└──────────────────────────────────┘");
-                System.out.println("Choose the number you want to do: ");
+                        "│+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-│\n" +
+                        "│1. Add                            │\n" +
+                        "│2. Edit                           │\n" +
+                        "│3. Delete                         │\n" +
+                        "│4. Search                         │\n" +
+                        "│5. Display                        │\n" +
+                        "│6. Enroll a Student               │\n" +
+                        "│7. Assign Instructor to a subject │\n" +
+                        "│8. Exit                           │\n" +
+                        "└──────────────────────────────────┘\n" +
+                        "Choose the number you want to do: ");
+
 
                 choice = sc.nextInt();
                 sc.nextLine();
@@ -102,6 +100,9 @@ public class Main {
             }
 
             switch (choice) {
+                case 0:
+                    // Go back to the main menu
+                    break;
                 case 1:
                     // Add
                     switch (options("Add")){
@@ -124,11 +125,50 @@ public class Main {
                     switch (options("Edit")){
                         case 1:
                             System.out.println("edit student");
-                            editPerson("Student");
+                            // Validate first if there are currently available students
+                            if(!Student.students.isEmpty()){
+                                editPerson("Student");
+                            }else {
+                                sc.nextLine();
+                                System.out.println("There are no students added yet.");
+                                while (true) {
+                                    System.out.println("Do you want to add a new student first(yes/no)?");
+                                    String confirmation = sc.nextLine();
+                                    if (confirmation.equalsIgnoreCase("yes")) {
+                                        addPerson("Student");
+                                        break;
+                                    } else if (confirmation.equalsIgnoreCase("no")) {
+                                        System.out.println("Returning to the main menu.");
+                                        break;
+                                    }else {
+                                        System.out.println("Please enter a valid answer");
+
+                                    }
+                                }
+                            }
                             break;
                         case 2:
                             System.out.println("edit instructor");
-                            editPerson("Instructor");
+                            if(!Student.students.isEmpty()) {
+                                editPerson("Instructor");
+                            }else {
+                                sc.nextLine();
+                                System.out.println("There are no students added yet.");
+                                while (true) {
+                                    System.out.println("Do you want to add a new instructpr first(yes/no)?");
+                                    String confirmation = sc.nextLine();
+                                    if (confirmation.equalsIgnoreCase("yes")) {
+                                        addPerson("Instructor");
+                                        break;
+                                    } else if (confirmation.equalsIgnoreCase("no")) {
+                                        System.out.println("Returning to the main menu.");
+                                        break;
+                                    }else {
+                                        System.out.println("Please enter a valid answer");
+
+                                    }
+                                }
+                            }
                             break;
                         case 3:
                             System.out.println("edit subject");
@@ -287,9 +327,7 @@ public class Main {
                             if (subject != null && subject.getInstructor() != null) {
                                 subject.setInstructor(instructor);
                             }
-                        } else {
-                            System.out.println("No instructor found with the provided ID. Please try again.");
-                            }
+                        }
                     }
                     else if (Instructor.instructors.isEmpty() && Subject.subjects.isEmpty()){
                         System.out.println("There are currently no instructor and a subject in this program");
@@ -312,34 +350,30 @@ public class Main {
         }
     }
     private static int options(String option) {
-
-        System.out.println("│││││"+option+"│││││");
-
         System.out.println("┌───────────────────┐");
         System.out.println("│  1. Student       │");
         System.out.println("│  2. Instructor    │");
         System.out.println("│  3. Subject       │");
+        System.out.println("│  0. Back to Main  │");
         System.out.println("└───────────────────┘");
 
         System.out.println("What do you want to "+ option + "?");
 
-
-        int addChoice = 0;
+        int addChoice = -1;
         boolean isValidInput = false;
 
         while (!isValidInput) {
             try {
                 addChoice = sc.nextInt();
-                if (addChoice < 1 || addChoice > 3) {
-                    throw new IllegalArgumentException("Invalid choice. Please enter a number between 1 and 3.");
+                if (addChoice < 0 || addChoice > 3) {
+                    throw new IllegalArgumentException("Invalid choice. Please enter a number between 0 and 3.");
                 }
                 isValidInput = true;
             } catch (Exception e) {
                 sc.next();
-                System.out.println("Invalid input. Please enter a valid number between 1 and 3.");
+                System.out.println("Invalid input. Please enter a valid number between 0 and 3.");
             }
         }
-
 
         return addChoice;
     }
@@ -388,7 +422,7 @@ public class Main {
                 System.out.println("Do you want to add this " + role + "? (yes/no)");
                 confirm = sc.nextLine().toLowerCase();
                 if(confirm.equalsIgnoreCase("no")){
-                    System.out.println("Student will not added.");
+                    System.out.println("Student will not be added.");
                     break;
                 }else if(confirm.equalsIgnoreCase("yes")){
                     break;
@@ -552,30 +586,70 @@ public class Main {
 
         // Check if there's an instructor assigned to the subject
         if (subject.getInstructor() == null) {
-            System.out.println("There are currently ");
-            System.out.println("Would you like to add an instructor? (yes/no)");
-            String choice = sc.nextLine();
-            Instructor instructor;
-            if (choice.equalsIgnoreCase("yes")) {
-                boolean validInstructorId = false;
-                while (!validInstructorId) {
-                    // Prompt the user to input instructor details
-                    System.out.println("Enter instructor ID:");
-                    String instructorId = sc.nextLine();
-                    // Find the instructor based on the provided ID
-                    instructor = Instructor.findInstructorById(instructorId);
+            int availableInstructorsCount = countAvailableInstructors();
 
-                    if (instructor != null) {
-                        subject.setInstructor(instructor);
-                        validInstructorId = true;
-                    } else {
-                        System.out.println("No instructor found with the provided ID. Please try again.");
+            // Print the message
+            System.out.println("There are currently " + availableInstructorsCount + " instructors available.");
+            String choice;
+            boolean addInstructor = false;
+            while (addInstructor!=true) {
+                try {
+                    System.out.println("Would you like to add an instructor? (yes/no)");
+                    choice = sc.nextLine();
+                    Instructor instructor;
+                    if (choice.equalsIgnoreCase("yes")) {
+                        boolean validInstructorId = false;
+                        Subject.displayAvailableInstructors(subject);
+                        while (!validInstructorId) {
+                            // Prompt the user to input instructor details
+                            System.out.println("Enter instructor ID:");
+                            String instructorId = sc.nextLine();
+                            // Find the instructor based on the provided ID
+                            instructor = Instructor.findInstructorById(instructorId);
+
+                            if (instructor != null) {
+                                subject.setInstructor(instructor);
+                                validInstructorId = true;
+                                addInstructor=true;
+
+                            } else {
+                                String confirmation;
+                                while (true){
+                                    System.out.println("Do you still want to add (yes/no)?");
+                                    confirmation = sc.nextLine();
+                                    if (confirmation.equalsIgnoreCase("yes")){
+                                        System.out.println("Enter the id again");
+                                        break;
+                                    }else if(confirmation.equalsIgnoreCase("no")){
+                                        addInstructor=true;
+                                        break;
+                                    }else {
+                                        System.out.println("Please enter a valid input");
+                                    }
+                                }
+                                if(confirmation.equalsIgnoreCase("no")){
+                                    System.out.println("Subject saved without an instructor.");
+                                    addInstructor=true;
+                                    break;
+                                }
+                            }
+                        }
+                    } else if (choice.equalsIgnoreCase("no")) {
+                        System.out.println("Subject saved without an instructor.");
+                            break;
+                        }
+                    else {
+                        System.out.println("Please enter a valid input");
                     }
+
+                } catch (Exception e) {
+                    sc.nextLine();
+                    System.out.println("Please enter a valid answer");
                 }
-            } else {
-                System.out.println("Subject saved without an instructor.");
             }
-        }
+
+            }
+
 
         // Add subject to the list of subjects
         Subject.addSubject(subject);
@@ -591,7 +665,8 @@ public class Main {
         if (role.equalsIgnoreCase("Student")) {
             boolean validStudentId = false;
             Student student = null;
-            while (!validStudentId) {
+            String confirmation ="s";
+            while (!validStudentId && !confirmation.equalsIgnoreCase("no")) {
                 // Prompt the user to input student details
                 System.out.println("Enter student ID:");
                 String studentId = sc.nextLine();
@@ -653,7 +728,18 @@ public class Main {
 
                     System.out.println("student details updated successfully.");
                 } else {
-                    System.out.println("No student found with the provided ID. Please try again.");
+                    while (true) {
+                        System.out.println("Do you still want to search a Student Id (yes/no)?");
+                        confirmation = sc.nextLine();
+                        if (confirmation.equalsIgnoreCase("yes")) {
+                            break;
+                        } else if (confirmation.equalsIgnoreCase("no")) {
+                            System.out.println("Returning to the main menu.");
+                            break;
+                        } else {
+                            System.out.println("Please enter a valid answer");
+                        }
+                    }
                 }
             }
         }
@@ -802,6 +888,15 @@ public class Main {
             searchPattern = scanner.nextLine().trim(); // Prompt user again
         }
         return searchPattern;
+    }
+    private static int countAvailableInstructors() {
+        int count = 0;
+        for (Instructor instructor : Instructor.instructors) {
+            if (instructor.getSizeOfAssignedSubjectsForInstructor(instructor) < Subject.maxAssignedSubject) {
+                count++;
+            }
+        }
+        return count;
     }
 
 }

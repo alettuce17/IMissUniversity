@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Subject {
     final public int maxStudentEnrolled = 30;
-    final public int maxAssignedSubject = 8;
+    static final public int maxAssignedSubject = 8;
     private boolean hasTeacher = false;
     private String name;
     private String code;
@@ -195,6 +195,7 @@ public class Subject {
         System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
     }
 
+
     // Helper method to format instructor's name as "F. LastName"
     private static String formatInstructorName(Instructor instructor) {
         if (instructor != null) {
@@ -238,6 +239,32 @@ public class Subject {
         if (!found) {
             System.out.println("No instructors found with the provided substring("+substring+").");
         }
+    }
+
+    public static void displayAvailableInstructors(Subject subject) {
+        System.out.println("Available Instructors for Subject: " + subject.getName());
+        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("| Instructor ID   | Instructor Name                | Assigned Subjects      |");
+        System.out.println("+---------------------------------------------------------------------------+");
+
+        for (Instructor instructor : Instructor.instructors) {
+            int assignedSubjectCount = instructor.getSizeOfAssignedSubjectsForInstructor(instructor);
+            if (assignedSubjectCount < maxAssignedSubject) {
+                String instructorId = instructor.getInstructorId();
+                String instructorName = instructor.getFullName();
+                // Truncate strings if they exceed column width
+                instructorId = truncateString(instructorId, 15);
+                instructorName = truncateString(instructorName, 30);
+                // Pad the strings to align columns
+                instructorId = padString(instructorId, 15);
+                instructorName = padString(instructorName, 30);
+                // Convert assigned subjects count to string and pad it
+                String assignedSubjectsStr = Integer.toString(assignedSubjectCount);
+                assignedSubjectsStr = padString(assignedSubjectsStr, 18); // Adjust the length as needed
+                System.out.println("| " + instructorId + " | " + instructorName + " | " + assignedSubjectsStr + "     |");
+            }
+        }
+        System.out.println("+---------------------------------------------------------------------------+");
     }
 
 }
