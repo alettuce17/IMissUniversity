@@ -143,11 +143,11 @@ public class Subject {
                 String studentId = student.getStudentId();
                 String studentName = student.getFullName();
                 // Truncate strings if they exceed column width
-                studentId = truncateString(studentId, 13);
-                studentName = truncateString(studentName, 37);
+                studentId = Person.truncateString(studentId, 13);
+                studentName = Person.truncateString(studentName, 37);
                 // Pad the strings to align columns
-                studentId = padString(studentId, 13);
-                studentName = padString(studentName, 37);
+                studentId = Person.padString(studentId, 13);
+                studentName = Person.padString(studentName, 37);
                 System.out.println("| " + studentId + "| " + studentName + "|");
             }
             System.out.println("+------------------------------------------------------+");
@@ -172,22 +172,22 @@ public class Subject {
             int enrolledStudentsCount = subject.getEnrolledStudents().size();
 
             // Truncate strings if they exceed column width
-            name = truncateString(name, 16);
-            code = truncateString(code, 8);
-            description = truncateString(description, 36);
-            subjectId = truncateString(subjectId, 12);
-            instructorName = truncateString(instructorName, 14); // Adjust the length as needed
+            name = Person.truncateString(name, 16);
+            code = Person.truncateString(code, 8);
+            description = Person.truncateString(description, 36);
+            subjectId = Person.truncateString(subjectId, 12);
+            instructorName = Person.truncateString(instructorName, 14); // Adjust the length as needed
 
             // Pad the strings to align columns
-            name = padString(name, 16);
-            code = padString(code, 8);
-            description = padString(description, 36);
-            subjectId = padString(subjectId, 12);
-            instructorName = padString(instructorName, 14); // Adjust the length as needed
+            name = Person.padString(name, 16);
+            code = Person.padString(code, 8);
+            description = Person.padString(description, 36);
+            subjectId = Person.padString(subjectId, 12);
+            instructorName = Person.padString(instructorName, 14); // Adjust the length as needed
 
             // Convert enrolled students count to string and pad it
             String enrolledStudentsStr = Integer.toString(enrolledStudentsCount);
-            enrolledStudentsStr = padString(enrolledStudentsStr, 18); // Adjust the length as needed
+            enrolledStudentsStr = Person.padString(enrolledStudentsStr, 18); // Adjust the length as needed
 
             System.out.println("| " + name + " | " + code + " | " + description + " | " + subjectId + " | " + instructorName + " | " + enrolledStudentsStr + "  |");
         }
@@ -208,25 +208,7 @@ public class Subject {
     }
 
     // Helper method to truncate a string if its length exceeds maxLength
-    private static String truncateString(String str, int maxLength) {
-        if (str.length() > maxLength) {
-            return str.substring(0, maxLength - 3) + "...";
-        }
-        return str;
-    }
-
-    // Helper method to pad a string to a specified length
-    private static String padString(String str, int length) {
-        if (str.length() >= length) {
-            return str;
-        } else {
-            StringBuilder paddedStr = new StringBuilder(str);
-            while (paddedStr.length() < length) {
-                paddedStr.append(" ");
-            }
-            return paddedStr.toString();
-        }
-    }
+   
 
     // Method to display enrolled subjects table
     public void displayEnrolledSubjectsTable() {
@@ -241,10 +223,10 @@ public class Subject {
             String enrolledStatus = isEnrolled ? "Yes" : "No";
             String subjectName = subject.getName();
             // Truncate strings if they exceed column width
-            subjectName = truncateString(subjectName, 20);
+            subjectName = Person.truncateString(subjectName, 20);
             // Pad the strings to align columns
-            subjectName = padString(subjectName, 20);
-            enrolledStatus = padString(enrolledStatus, 15);
+            subjectName = Person.padString(subjectName, 20);
+            enrolledStatus = Person.padString(enrolledStatus, 15);
 
             System.out.println("| " + subjectName + " | " + enrolledStatus + " |");
         }
@@ -278,14 +260,14 @@ public class Subject {
                 String instructorId = instructor.getInstructorId();
                 String instructorName = instructor.getFullName();
                 // Truncate strings if they exceed column width
-                instructorId = truncateString(instructorId, 15);
-                instructorName = truncateString(instructorName, 30);
+                instructorId = Person.truncateString(instructorId, 15);
+                instructorName = Person.truncateString(instructorName, 30);
                 // Pad the strings to align columns
-                instructorId = padString(instructorId, 15);
-                instructorName = padString(instructorName, 30);
+                instructorId = Person.padString(instructorId, 15);
+                instructorName = Person.padString(instructorName, 30);
                 // Convert assigned subjects count to string and pad it
                 String assignedSubjectsStr = Integer.toString(assignedSubjectCount);
-                assignedSubjectsStr = padString(assignedSubjectsStr, 18); // Adjust the length as needed
+                assignedSubjectsStr = Person.padString(assignedSubjectsStr, 18); // Adjust the length as needed
                 System.out.println("| " + instructorId + " | " + instructorName + " | " + assignedSubjectsStr + "     |");
             }
         }
@@ -293,30 +275,7 @@ public class Subject {
     }
     public static int getTotalSubjects() {
         return subjects.size();
+
     }
 
-    public void displayEnrolledSubjectsTable(Student student) {
-        System.out.println();
-        System.out.println("+--------------------------------------+");
-        System.out.println("| Enrolled Subject Table               |");
-        System.out.println("+--------------------------------------+");
-        System.out.println("| Subject Name        | Enrolled       |");
-        System.out.println("+--------------------------------------+");
-
-        for (Subject subject : Subject.subjects) {
-            boolean isEnrolled = subject.getEnrolledStudents().contains(this);
-            String enrolledStatus = isEnrolled ? "Yes" : "No";
-            String subjectName = subject.getName();
-            // Truncate strings if they exceed column width
-            subjectName = truncateString(subjectName, 20);
-            enrolledStatus = truncateString(enrolledStatus, 15);
-            // Pad the strings to align columns
-            subjectName = padString(subjectName, 20);
-            enrolledStatus = padString(enrolledStatus, 15);
-
-            System.out.println("| " + subjectName + " | " + enrolledStatus + " |");
-        }
-
-        System.out.println("+--------------------------------------+");
-    }
 }

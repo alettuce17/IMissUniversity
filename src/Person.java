@@ -33,7 +33,24 @@ public abstract class Person {
         System.out.println("Address: " + address);
         System.out.println("Age: " + age);
     }
+    public static String truncateString(String str, int maxLength) {
+        if (str.length() > maxLength) {
+            return str.substring(0, maxLength - 3) + "...";
+        }
+        return str;
+    }
 
+    public static String padString(String str, int length) {
+        if (str.length() >= length) {
+            return str;
+        } else {
+            StringBuilder paddedStr = new StringBuilder(str);
+            while (paddedStr.length() < length) {
+                paddedStr.append(" ");
+            }
+            return paddedStr.toString();
+        }
+    }
     public String getFullName() {
         if (middleName != null && !middleName.isEmpty()) {
             return firstName + " " + middleName + " " + lastName;

@@ -86,6 +86,63 @@ public class Student extends Person {
     public int getTotalEnrolledSubjects() {
         return enrolledSubjectIds.size();
     }
+    public void displayEnrolledSubjectsTable() {
+        System.out.println();
+        System.out.println("+--------------------------------------+");
+        System.out.println("| Enrolled Subject Table               |");
+        System.out.println("+--------------------------------------+");
+        System.out.println("| Subject Name        | Enrolled       |");
+        System.out.println("+--------------------------------------+");
 
+        for (Subject subject : Subject.subjects) {
+            boolean isEnrolled = subject.getEnrolledStudents().contains(this);
+            String enrolledStatus = isEnrolled ? "Yes" : "No";
+            String subjectName = subject.getName();
+            // Truncate strings if they exceed column width
+            subjectName = truncateString(subjectName, 20);
+            enrolledStatus = truncateString(enrolledStatus, 15);
+            // Pad the strings to align columns
+            subjectName = padString(subjectName, 20);
+            enrolledStatus = padString(enrolledStatus, 15);
+
+            System.out.println("| " + subjectName + "| " + enrolledStatus + "|");
+        }
+        System.out.println("+--------------------------------------+");
+
+        // Print total enrolled subjects line with appropriate padding and truncation
+        String totalEnrolledSubjectsLine = "| Total Enrolled Subjects: " + getTotalEnrolledSubjects();
+        totalEnrolledSubjectsLine = padString(totalEnrolledSubjectsLine, 38);
+        System.out.println(totalEnrolledSubjectsLine + " |");
+
+        System.out.println("+--------------------------------------+");
+    }
+
+    // Helper method to truncate a string if its length exceeds maxLength
+
+    public void enrollInSubject(String subjectId) {
+        // Check if the subject ID is valid and exists in the system
+        Subject subject = Subject.findSubjectById(subjectId);
+        if (subject != null) {
+            // Add the subject ID to the enrolledSubjectIds list for the student
+            enrolledSubjectIds.add(subjectId);
+            // Add the student to the list of enrolled students for the subject
+            subject.enrollStudent(this);
+        } else {
+            System.out.println("Subject not found!");
+        }
+    }
+    public void unenrollFromSubject(String subjectId) {
+        // Check if the subject ID is valid and exists in the system
+        Subject subject = Subject.findSubjectById(subjectId);
+        if (subject != null) {
+            // Remove the subject ID from the enrolledSubjectIds list for the student
+            enrolledSubjectIds.remove(subjectId);
+            // Remove the student from the list of enrolled students for the subject
+            subject.unenrollStudent(this);
+            System.out.println("Student unenrolled from subject: " + subject.getName());
+        } else {
+            System.out.println("Subject not found!");
+        }
+    }
 }
 
