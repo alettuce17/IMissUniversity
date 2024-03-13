@@ -295,4 +295,28 @@ public class Subject {
         return subjects.size();
     }
 
+    public void displayEnrolledSubjectsTable(Student student) {
+        System.out.println();
+        System.out.println("+--------------------------------------+");
+        System.out.println("| Enrolled Subject Table               |");
+        System.out.println("+--------------------------------------+");
+        System.out.println("| Subject Name        | Enrolled       |");
+        System.out.println("+--------------------------------------+");
+
+        for (Subject subject : Subject.subjects) {
+            boolean isEnrolled = subject.getEnrolledStudents().contains(this);
+            String enrolledStatus = isEnrolled ? "Yes" : "No";
+            String subjectName = subject.getName();
+            // Truncate strings if they exceed column width
+            subjectName = truncateString(subjectName, 20);
+            enrolledStatus = truncateString(enrolledStatus, 15);
+            // Pad the strings to align columns
+            subjectName = padString(subjectName, 20);
+            enrolledStatus = padString(enrolledStatus, 15);
+
+            System.out.println("| " + subjectName + " | " + enrolledStatus + " |");
+        }
+
+        System.out.println("+--------------------------------------+");
+    }
 }
