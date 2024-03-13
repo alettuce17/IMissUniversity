@@ -106,7 +106,7 @@ public class Subject {
 
     public Instructor getInstructor() {
         return instructor;
-        }
+    }
 
     public Boolean hasTeacher(){
         if(instructor!=null) {
@@ -117,7 +117,7 @@ public class Subject {
     public void setInstructor(Instructor instructor) {
         this.instructor = instructor;
     }
-     List<Student> getEnrolledStudents() {
+    List<Student> getEnrolledStudents() {
         return enrolledStudents;
     }
 
@@ -227,6 +227,31 @@ public class Subject {
             return paddedStr.toString();
         }
     }
+
+    // Method to display enrolled subjects table
+    public void displayEnrolledSubjectsTable() {
+        System.out.println("+--------------------------------------+");
+        System.out.println("| Enrolled Subject Table               |");
+        System.out.println("+--------------------------------------+");
+        System.out.println("| Subject Name        | Enrolled       |");
+        System.out.println("+--------------------------------------+");
+
+        for (Subject subject : Subject.subjects) {
+            boolean isEnrolled = subject.getEnrolledStudents().contains(this);
+            String enrolledStatus = isEnrolled ? "Yes" : "No";
+            String subjectName = subject.getName();
+            // Truncate strings if they exceed column width
+            subjectName = truncateString(subjectName, 20);
+            // Pad the strings to align columns
+            subjectName = padString(subjectName, 20);
+            enrolledStatus = padString(enrolledStatus, 15);
+
+            System.out.println("| " + subjectName + " | " + enrolledStatus + " |");
+        }
+
+        System.out.println("+--------------------------------------+");
+    }
+
     public static void searchSubjectsByName(String substring) {
         boolean found = false;
         for (Subject subject : subjects) {
@@ -265,6 +290,9 @@ public class Subject {
             }
         }
         System.out.println("+---------------------------------------------------------------------------+");
+    }
+    public static int getTotalSubjects() {
+        return subjects.size();
     }
 
 }

@@ -83,28 +83,52 @@ public class Student extends Person {
         }
     }
     private ArrayList<String> enrolledSubjectIds = new ArrayList<>(); // Store enrolled subject IDs
-
-    // Existing constructors...
-
-    // Method to enroll a subject
-    public void enrollSubject(String subjectId) {
-        enrolledSubjectIds.add(subjectId);
-    }
-
-    // Method to remove enrollment from a subject
-    public void removeSubject(String subjectId) {
-        enrolledSubjectIds.remove(subjectId);
-    }
-
-    // Method to get total number of enrolled subjects
     public int getTotalEnrolledSubjects() {
         return enrolledSubjectIds.size();
     }
+    public void displayEnrolledSubjectsTable() {
+        System.out.println();
+        System.out.println("+--------------------------------------+");
+        System.out.println("| Enrolled Subject Table               |");
+        System.out.println("+--------------------------------------+");
+        System.out.println("| Subject Name        | Enrolled       |");
+        System.out.println("+--------------------------------------+");
 
-    // Getter for enrolledSubjectIds
-    public ArrayList<String> getEnrolledSubjectIds() {
-        return enrolledSubjectIds;
+        for (Subject subject : Subject.subjects) {
+            boolean isEnrolled = subject.getEnrolledStudents().contains(this);
+            String enrolledStatus = isEnrolled ? "Yes" : "No";
+            String subjectName = subject.getName();
+            // Truncate strings if they exceed column width
+            subjectName = truncateString(subjectName, 20);
+            enrolledStatus = truncateString(enrolledStatus, 15);
+            // Pad the strings to align columns
+            subjectName = padString(subjectName, 20);
+            enrolledStatus = padString(enrolledStatus, 15);
+
+            System.out.println("| " + subjectName + " | " + enrolledStatus + " |");
+        }
+
+        System.out.println("+--------------------------------------+");
     }
+    public static String truncateString(String str, int maxLength) {
+        if (str.length() > maxLength) {
+            return str.substring(0, maxLength - 3) + "...";
+        }
+        return str;
+    }
+
+    public static String padString(String str, int length) {
+        if (str.length() >= length) {
+            return str;
+        } else {
+            StringBuilder paddedStr = new StringBuilder(str);
+            while (paddedStr.length() < length) {
+                paddedStr.append(" ");
+            }
+            return paddedStr.toString();
+        }
+    }
+    // Helper method to truncate a string if its length exceeds maxLength
 
 
 }
