@@ -4,7 +4,9 @@ import java.util.Random;
 
 public class Subject {
     final public int maxStudentEnrolled = 30;
+    static final public int maxEnrolledSubject = 8;
     static final public int maxAssignedSubject = 8;
+
     private boolean hasTeacher = false;
     private String name;
     private String code;
@@ -107,6 +109,11 @@ public class Subject {
     public Instructor getInstructor() {
         return instructor;
     }
+    public void removeInstructor() {
+        this.instructor = null;
+
+
+    }
 
     public Boolean hasTeacher(){
         if(instructor!=null) {
@@ -190,9 +197,9 @@ public class Subject {
             enrolledStudentsStr = Person.padString(enrolledStudentsStr, 18); // Adjust the length as needed
 
             System.out.println("| " + name + " | " + code + " | " + description + " | " + subjectId + " | " + instructorName + " | " + enrolledStudentsStr + "  |");
-        }
+            System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
 
-        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+        }
     }
 
 
@@ -250,9 +257,9 @@ public class Subject {
 
     public static void displayAvailableInstructors(Subject subject) {
         System.out.println("Available Instructors for Subject: " + subject.getName());
-        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("+===========================================================================+");
         System.out.println("| Instructor ID   | Instructor Name                | Assigned Subjects      |");
-        System.out.println("+---------------------------------------------------------------------------+");
+        System.out.println("+===========================================================================+");
 
         for (Instructor instructor : Instructor.instructors) {
             int assignedSubjectCount = instructor.getSizeOfAssignedSubjectsForInstructor(instructor);
@@ -268,14 +275,22 @@ public class Subject {
                 // Convert assigned subjects count to string and pad it
                 String assignedSubjectsStr = Integer.toString(assignedSubjectCount);
                 assignedSubjectsStr = Person.padString(assignedSubjectsStr, 18); // Adjust the length as needed
-                System.out.println("| " + instructorId + " | " + instructorName + " | " + assignedSubjectsStr + "     |");
+                System.out.println("| " + instructorId + " | " + instructorName + " | " + assignedSubjectsStr + "       |");
             }
         }
-        System.out.println("+---------------------------------------------------------------------------+");
     }
     public static int getTotalSubjects() {
         return subjects.size();
 
+    }
+    public boolean isInstructorAssigned(Instructor instructor) {
+        return this.instructor != null && this.instructor.equals(instructor);
+    }
+    public boolean hasInstructorsAssigned() {
+        return this.instructor != null;
+    }
+    public void unassignInstructor() {
+        this.instructor = null;
     }
 
 }

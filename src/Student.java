@@ -54,6 +54,14 @@ public class Student extends Person {
         super.displayInfo();
         System.out.println("Student ID: " + studentId);
     }
+
+    // Your existing code...
+
+    // Static method to access role without instantiation
+
+    public static String getStaticRole() {
+        return "Student";
+    }
     public static void addStudent(Student student) {
         students.add(student);
     }
@@ -82,39 +90,42 @@ public class Student extends Person {
             System.out.println("No instructors found with the provided substring("+substring+").");
         }
     }
+
     private ArrayList<String> enrolledSubjectIds = new ArrayList<>(); // Store enrolled subject IDs
     public int getTotalEnrolledSubjects() {
         return enrolledSubjectIds.size();
     }
     public void displayEnrolledSubjectsTable() {
         System.out.println();
-        System.out.println("+--------------------------------------+");
-        System.out.println("| Enrolled Subject Table               |");
-        System.out.println("+--------------------------------------+");
-        System.out.println("| Subject Name        | Enrolled       |");
-        System.out.println("+--------------------------------------+");
+        System.out.println("+-------------------------------------------------------------+");
+        System.out.println("|                  Enrolled Subject Table                     |");
+        System.out.println("+-------------------------------------------------------------+");
+        System.out.println("| Subject ID   | Subject Name        | Enrolled               |");
+        System.out.println("+-------------------------------------------------------------+");
 
         for (Subject subject : Subject.subjects) {
             boolean isEnrolled = subject.getEnrolledStudents().contains(this);
             String enrolledStatus = isEnrolled ? "Yes" : "No";
             String subjectName = subject.getName();
+            String subjectId = subject.getSubjectId();
             // Truncate strings if they exceed column width
             subjectName = truncateString(subjectName, 20);
+            subjectId = truncateString(subjectId, 12);
             enrolledStatus = truncateString(enrolledStatus, 15);
             // Pad the strings to align columns
             subjectName = padString(subjectName, 20);
+            subjectId = padString(subjectId, 12);
             enrolledStatus = padString(enrolledStatus, 15);
 
-            System.out.println("| " + subjectName + "| " + enrolledStatus + "|");
+            System.out.println("| " + subjectId + " | " + subjectName + " | " + enrolledStatus + " |");
         }
-        System.out.println("+--------------------------------------+");
 
         // Print total enrolled subjects line with appropriate padding and truncation
         String totalEnrolledSubjectsLine = "| Total Enrolled Subjects: " + getTotalEnrolledSubjects();
-        totalEnrolledSubjectsLine = padString(totalEnrolledSubjectsLine, 38);
+        totalEnrolledSubjectsLine = padString(totalEnrolledSubjectsLine, 61);
         System.out.println(totalEnrolledSubjectsLine + " |");
 
-        System.out.println("+--------------------------------------+");
+        System.out.println("+-------------------------------------------------------------+");
     }
 
     // Helper method to truncate a string if its length exceeds maxLength
@@ -123,6 +134,12 @@ public class Student extends Person {
         // Check if the subject ID is valid and exists in the system
         Subject subject = Subject.findSubjectById(subjectId);
         if (subject != null) {
+            // Check if the student is already enrolled in the subject
+            if (enrolledSubjectIds.contains(subjectId)) {
+                System.out.println("Student is already enrolled in this subject.");
+                return;
+            }
+
             // Add the subject ID to the enrolledSubjectIds list for the student
             enrolledSubjectIds.add(subjectId);
             // Add the student to the list of enrolled students for the subject
@@ -131,14 +148,14 @@ public class Student extends Person {
             System.out.println("Subject not found!");
         }
     }
-    public void unenrollFromSubject(String subjectId) {
+    public void unenrollFromSubject(Subject subject) {
         // Check if the subject ID is valid and exists in the system
-        Subject subject = Subject.findSubjectById(subjectId);
+
         if (subject != null) {
             // Remove the subject ID from the enrolledSubjectIds list for the student
-            enrolledSubjectIds.remove(subjectId);
+            enrolledSubjectIds.remove(subject.getSubjectId());
             // Remove the student from the list of enrolled students for the subject
-            subject.unenrollStudent(this);
+            subject.unenrollStudent(this); // Pass the student object
             System.out.println("Student unenrolled from subject: " + subject.getName());
         } else {
             System.out.println("Subject not found!");

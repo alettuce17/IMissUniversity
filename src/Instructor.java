@@ -52,6 +52,10 @@ public class Instructor extends Person {
         super.displayInfo();
         System.out.println("Instructor ID: " + instructorId);
     }
+
+    public static String getRole() {
+        return "Instructor";
+    }
     public void displayHandledSubjects() {
         System.out.println("Subjects handled by " + getFullName() + " (" + getInstructorId() + "):");
         System.out.println("+--------------------------------------+");
@@ -125,4 +129,4 @@ public class Instructor extends Person {
         return count;
     }
 
-}
+    }
