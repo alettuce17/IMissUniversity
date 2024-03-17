@@ -40,3 +40,63 @@
                         "│11. Exit                          │\n" +
                         "└──────────────────────────────────┘\n" +
                         "Choose the number you want to do: ");
+
+
+                        System.out.println("Returning to the main menu.");
+
+
+                        public class Student implements Searchable<Student> {
+                            // Existing code...
+
+                            @Override
+                            public Student findById(String id) {
+                                for (Student student : students) {
+                                    if (student.getStudentId().equals(id)) {
+                                        return student;
+                                    }
+                                }
+                                return null;
+                            }
+
+                            // Existing code...
+                        }
+
+
+
+
+public class Student implements Searchable<Student> {
+    // Existing code...
+
+    @Override
+    public Student findById(String id) {
+        for (Student student : students) {
+            if (student.getStudentId().equals(id)) {
+                return student;
+            }
+        }
+        return null;
+    }
+
+    // Existing code...
+}
+
+
+public interface Searchable<T> {
+    T findById(String id);
+}
+
+public class Instructor implements Searchable<Instructor> {
+    // Existing code...
+
+    @Override
+    public Instructor findById(String id) {
+        for (Instructor instructor : instructors) {
+            if (instructor.getInstructorId().equals(id)) {
+                return instructor;
+            }
+        }
+        return null;
+    }
+
+    // Existing code...
+}

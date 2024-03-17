@@ -38,6 +38,14 @@ public class Instructor extends Person {
         return true;
     }
 
+    public static boolean anyInstructorHasAssignedSubjects() {
+        for (Instructor instructor : instructors) {
+            if (instructor.getSizeOfAssignedSubjectsForInstructor() > 0) {
+                return true; // If any instructor has assigned subjects, return true immediately
+            }
+        }
+        return false; // If no instructor has assigned subjects, return false
+    }
     public static Instructor findInstructorById(String instructorId) {
         for (Instructor instructor : instructors) {
             if (instructor.getInstructorId().equals(instructorId)) {
@@ -109,6 +117,13 @@ public class Instructor extends Person {
             System.out.println("No instructors found with the provided substring("+substring+").");
         }
     }
+    public static void deleteInstructorByID(String studentId) {
+        Instructor instructorToDelete = findInstructorById(studentId);
+        if (instructorToDelete != null) {
+            instructors.remove(instructorToDelete);
+            System.out.println("Student with ID " + studentId + " deleted successfully.");
+        }
+    }
     public int getSizeOfAssignedSubjectsForInstructor() {
         int count = 0;
         for (Subject subject : Subject.subjects) {
@@ -127,6 +142,39 @@ public class Instructor extends Person {
             }
         }
         return count;
+    }
+    public static void displayAllInstructors() {
+        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("|                                             All Instructors                                                              |");
+        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("| Instructor ID        | Instructor Name                                                     | Assigned Subjects           |");
+        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+
+        for (Instructor instructor : instructors) {
+            String instructorId = instructor.getInstructorId();
+            String instructorName = instructor.getFullName();
+            int assignedSubjectsCount = instructor.getSizeOfAssignedSubjectsForInstructor();
+
+            // Truncate strings if they exceed column width
+            instructorId = truncateString(instructorId, 20);
+            instructorName = truncateString(instructorName, 35);
+            String assignedSubjectsStr = Integer.toString(assignedSubjectsCount);
+            assignedSubjectsStr = truncateString(assignedSubjectsStr, 25);
+
+            // Pad the strings to align columns
+            instructorId = padString(instructorId, 20);
+            instructorName = padString(instructorName, 67);
+            assignedSubjectsStr = padString(assignedSubjectsStr, 25);
+
+            System.out.println("| " + instructorId + " | " + instructorName + " | " + assignedSubjectsStr + "   |");
+        }
+
+        // Print total instructors line with appropriate padding and truncation
+        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+        String totalInstructorsLine = "| Total Instructors: " + instructors.size();
+        totalInstructorsLine = padString(totalInstructorsLine, 122);
+        System.out.println(totalInstructorsLine + " |");
+        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
     }
 
     }

@@ -8,18 +8,18 @@ public abstract class Person {
 
 
     public Person(String firstName, String lastName, String address, int age) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
+        this.firstName = firstName.substring(0, 1).toUpperCase() + lastName.substring(1);
+        this.lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
+        this.address = address.substring(0, 1).toUpperCase() + lastName.substring(1);
         this.age = age;
     }
 
     // Constructor with middle name
     public Person(String firstName, String middleName, String lastName, String address, int age) {
-        this.firstName = firstName;
-        this.middleName = middleName;
-        this.lastName = lastName;
-        this.address = address;
+        this.firstName = firstName.substring(0, 1).toUpperCase() + lastName.substring(1);
+        this.middleName = middleName.substring(0, 1).toUpperCase() + lastName.substring(1);
+        this.lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
+        this.address = address.substring(0, 1).toUpperCase() + lastName.substring(1);
         this.age = age;
     }
 
@@ -66,10 +66,10 @@ public abstract class Person {
     }
 
     public void setFirstName(String firstName) {
-        if (firstName != null && !firstName.isEmpty()) {
-            this.firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
+        if (firstName == null ) {
+            this.firstName = this.firstName;
         } else {
-            this.firstName = firstName;
+            this.firstName = firstName.substring(0, 1).toUpperCase() + lastName.substring(1);
         }
     }
 
@@ -78,11 +78,11 @@ public abstract class Person {
     }
 
     public void setMiddleName(String middleName) {
-        if (middleName != null && !middleName.isEmpty()) {
-            this.middleName = middleName.substring(0, 1).toUpperCase() + middleName.substring(1);
+        if (middleName == null) {
+            this.middleName = this.middleName;
             
         } else {
-            this.middleName = middleName;
+            this.middleName = middleName.substring(0, 1).toUpperCase() + lastName.substring(1);
         }
     }
 
@@ -92,11 +92,15 @@ public abstract class Person {
     }
 
     public void setLastName(String lastName) {
-        if (lastName != null && !lastName.isEmpty()) {
-            this.lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
+        if (lastName == null) {
+            this.lastName = this.lastName;
         } else {
-            this.lastName = lastName;
+            this.lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
         }
+    }
+
+    public static String getRole() {
+        return null;
     }
 
     public String getAddress() {
@@ -104,7 +108,11 @@ public abstract class Person {
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        if (address == null ){
+            this.lastName = this.lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
+        }else {
+            this.address = address.substring(0, 1).toUpperCase() + lastName.substring(1);
+        }
     }
 
     public int getAge() {
@@ -112,7 +120,11 @@ public abstract class Person {
     }
 
     public void setAge(int age) {
-        this.age = age;
+        if (age > 0) {
+            this.age = age;
+        }else {
+            this.age = this.age;
+        }
     }
 
 }

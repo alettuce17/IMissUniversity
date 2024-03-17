@@ -2,7 +2,7 @@ import java.time.Year;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Student extends Person {
+public class Student extends Person  {
     private static ArrayList<String> studentIds = new ArrayList<>();
     public static ArrayList<Student> students = new ArrayList<>();
     private String studentId;
@@ -55,7 +55,6 @@ public class Student extends Person {
         System.out.println("Student ID: " + studentId);
     }
 
-    // Your existing code...
 
     // Static method to access role without instantiation
 
@@ -91,7 +90,7 @@ public class Student extends Person {
         }
     }
 
-    private ArrayList<String> enrolledSubjectIds = new ArrayList<>(); // Store enrolled subject IDs
+    private static ArrayList<String> enrolledSubjectIds = new ArrayList<>(); // Store enrolled subject IDs
     public int getTotalEnrolledSubjects() {
         return enrolledSubjectIds.size();
     }
@@ -100,7 +99,7 @@ public class Student extends Person {
         System.out.println("+-------------------------------------------------------------+");
         System.out.println("|                  Enrolled Subject Table                     |");
         System.out.println("+-------------------------------------------------------------+");
-        System.out.println("| Subject ID   | Subject Name        | Enrolled               |");
+        System.out.println("| Subject ID   | Subject Name         | Enrolled              |");
         System.out.println("+-------------------------------------------------------------+");
 
         for (Subject subject : Subject.subjects) {
@@ -117,7 +116,7 @@ public class Student extends Person {
             subjectId = padString(subjectId, 12);
             enrolledStatus = padString(enrolledStatus, 15);
 
-            System.out.println("| " + subjectId + " | " + subjectName + " | " + enrolledStatus + " |");
+            System.out.println("| " + subjectId + " | " + subjectName + " | " + enrolledStatus + "      |");
         }
 
         // Print total enrolled subjects line with appropriate padding and truncation
@@ -126,6 +125,10 @@ public class Student extends Person {
         System.out.println(totalEnrolledSubjectsLine + " |");
 
         System.out.println("+-------------------------------------------------------------+");
+        System.out.println();
+    }
+    public static String getRole() {
+        return "Student";
     }
 
     // Helper method to truncate a string if its length exceeds maxLength
@@ -142,11 +145,27 @@ public class Student extends Person {
 
             // Add the subject ID to the enrolledSubjectIds list for the student
             enrolledSubjectIds.add(subjectId);
+            System.out.println("Student enrolled in " + subject.getName());
+
             // Add the student to the list of enrolled students for the subject
             subject.enrollStudent(this);
         } else {
             System.out.println("Subject not found!");
         }
+    }
+    public boolean enrolledInSubject(Subject subject) {
+        // Check if the subject ID is valid and exists in the system
+
+        if (subject != null) {
+            // Check if the student is already enrolled in the subject
+            if (enrolledSubjectIds.contains(subject.getSubjectId())) {
+                System.out.println("Student is already enrolled in this subject.");
+                return true;
+            }
+        } else {
+            System.out.println("Subject not found!");
+        }
+        return false;
     }
     public void unenrollFromSubject(Subject subject) {
         // Check if the subject ID is valid and exists in the system
@@ -161,5 +180,6 @@ public class Student extends Person {
             System.out.println("Subject not found!");
         }
     }
+
 }
 
