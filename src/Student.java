@@ -92,8 +92,15 @@ public class Student extends Person  {
 
     private static ArrayList<String> enrolledSubjectIds = new ArrayList<>(); // Store enrolled subject IDs
     public int getTotalEnrolledSubjects() {
-        return enrolledSubjectIds.size();
+        int totalEnrolledSubjects = 0;
+        for (Subject subject : Subject.subjects) {
+            if (subject.getEnrolledStudents().contains(this)) {
+                totalEnrolledSubjects++;
+            }
+        }
+        return totalEnrolledSubjects;
     }
+
     public void displayEnrolledSubjectsTable() {
         System.out.println();
         System.out.println("+-------------------------------------------------------------+");
@@ -131,55 +138,56 @@ public class Student extends Person  {
         return "Student";
     }
 
+
+
     // Helper method to truncate a string if its length exceeds maxLength
 
-    public void enrollInSubject(String subjectId) {
-        // Check if the subject ID is valid and exists in the system
-        Subject subject = Subject.findSubjectById(subjectId);
-        if (subject != null) {
-            // Check if the student is already enrolled in the subject
-            if (enrolledSubjectIds.contains(subjectId)) {
-                System.out.println("Student is already enrolled in this subject.");
-                return;
-            }
-
-            // Add the subject ID to the enrolledSubjectIds list for the student
-            enrolledSubjectIds.add(subjectId);
-            System.out.println("Student enrolled in " + subject.getName());
-
-            // Add the student to the list of enrolled students for the subject
-            subject.enrollStudent(this);
-        } else {
-            System.out.println("Subject not found!");
-        }
-    }
-    public boolean enrolledInSubject(Subject subject) {
-        // Check if the subject ID is valid and exists in the system
-
-        if (subject != null) {
-            // Check if the student is already enrolled in the subject
-            if (enrolledSubjectIds.contains(subject.getSubjectId())) {
-                System.out.println("Student is already enrolled in this subject.");
-                return true;
-            }
-        } else {
-            System.out.println("Subject not found!");
-        }
-        return false;
-    }
-    public void unenrollFromSubject(Subject subject) {
-        // Check if the subject ID is valid and exists in the system
-
-        if (subject != null) {
-            // Remove the subject ID from the enrolledSubjectIds list for the student
-            enrolledSubjectIds.remove(subject.getSubjectId());
-            // Remove the student from the list of enrolled students for the subject
-            subject.unenrollStudent(this); // Pass the student object
-            System.out.println("Student unenrolled from subject: " + subject.getName());
-        } else {
-            System.out.println("Subject not found!");
-        }
-    }
+//    public void enrollInSubject(String subjectId) {
+//        // Check if the subject ID is valid and exists in the system
+//        Subject subject = Subject.findSubjectById(subjectId);
+//        if (subject != null) {
+//            // Check if the student is already enrolled in the subject
+//            if (enrolledSubjectIds.contains(subjectId)) {
+//                System.out.println("Student is already enrolled in this subject.");
+//                return;
+//            }
+//
+//            // Add the subject ID to the enrolledSubjectIds list for the student
+//            enrolledSubjectIds.add(subjectId);
+//            System.out.println("Student enrolled in " + subject.getName());
+//
+//            // Add the student to the list of enrolled students for the subject
+//            subject.enrollStudent(this);
+//        } else {
+//            System.out.println("Subject not found!");
+//        }
+//    }
+//    public boolean enrolledInSubject(Subject subject) {
+//        // Check if the subject ID is valid and exists in the system
+//
+//        if (subject != null) {
+//            // Check if the student is already enrolled in the subject
+//            if (enrolledSubjectIds.contains(subject.getSubjectId())) {
+//                System.out.println("Student is already enrolled in this subject.");
+//                return true;
+//            }
+//        } else {
+//            System.out.println("Subject not found!");
+//        }
+//        return false;
+//    }
+//    public void unenrollFromSubject(Subject subject) {
+//        // Check if the subject ID is valid and exists in the system
+//
+//        if (subject != null) {
+//            // Remove the subject ID from the enrolledSubjectIds list for the student
+//            enrolledSubjectIds.remove(subject.getSubjectId());
+//            // Remove the student from the list of enrolled students for the subject
+//            subject.unenrollStudent(this); // Pass the student object
+//            System.out.println("Student unenrolled from subject: " + subject.getName());
+//        } else {
+//            System.out.println("Subject not found!");
+//        }
+//    }
 
 }
-

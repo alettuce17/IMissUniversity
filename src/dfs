@@ -100,3 +100,6 @@ public class Instructor implements Searchable<Instructor> {
 
     // Existing code...
 }
+
+
+(Subject.enrolledStudents.contains(student))

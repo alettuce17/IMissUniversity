@@ -80,7 +80,7 @@ public abstract class Person {
     public void setMiddleName(String middleName) {
         if (middleName == null) {
             this.middleName = this.middleName;
-            
+
         } else {
             this.middleName = middleName.substring(0, 1).toUpperCase() + lastName.substring(1);
         }
@@ -128,4 +128,3 @@ public abstract class Person {
     }
 
 }
-

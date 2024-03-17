@@ -155,11 +155,10 @@ public class Subject implements Enrollable{
         return false; // If no subject has enrolled students, return false
     }
 
-    @Override
+
     public void enrollStudent(Student student) {
         enrolledStudents.add(student);
     }
-    @Override
     public void unenrollStudent(Student student) {
         enrolledStudents.remove(student);
     }
@@ -349,4 +348,3 @@ public class Subject implements Enrollable{
 
 
 }
-
