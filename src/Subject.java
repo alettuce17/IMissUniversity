@@ -82,7 +82,11 @@ public class Subject implements Enrollable{
         return false; // Subject not found
     }
     public void setName(String name) {
-        this.name = name;
+        if (name != null ) {
+            this.name = this.name;
+        } else {
+            this.name = name;
+        }
     }
     public void displaySubjectInformation(Subject subject) {
         System.out.println("Subject Name: " + subject.getName());
@@ -100,7 +104,12 @@ public class Subject implements Enrollable{
     }
 
     public void setCode(String code) {
-        this.code = code;
+        if (code != null ) {
+            this.code = this.code;
+        } else {
+            this.code = code;
+        }
+
     }
 
     public String getDescription() {
@@ -108,7 +117,11 @@ public class Subject implements Enrollable{
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        if (description!=null) {
+            this.description = this.description;
+        }else{
+            this.description = description;
+        }
     }
 
     public String getSubjectId() {
@@ -189,8 +202,8 @@ public class Subject implements Enrollable{
     public static void displayAllSubjects() {
         System.out.println();
         System.out.println("+==========================================================================================================================+");
-        System.out.println("|                                          Available Subjects                                                              |");
-        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("│" + Main.padStringMiddle("All Subjects",122)+"│");
+        System.out.println("+==========================================================================================================================+");
         System.out.println("| Name             | Code     | Description                          | Subject ID   | Instructor     |Enrolled Students    |");
         System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
 
@@ -292,15 +305,16 @@ public class Subject implements Enrollable{
                 // Convert assigned subjects count to string and pad it
                 String assignedSubjectsStr = Integer.toString(assignedSubjectCount);
                 assignedSubjectsStr = Person.padString(assignedSubjectsStr, 18); // Adjust the length as needed
-                System.out.println("| " + instructorId + " | " + instructorName + " | " + assignedSubjectsStr + "       |");
+                System.out.println("| " + instructorId + " | " + instructorName + " | " + assignedSubjectsStr + "      |");
+                System.out.println("+==========================================================================================================================+");
             }
         }
     }
     public static void displayAllStudents() {
         System.out.println();
         System.out.println("+==========================================================================================================================+");
-        System.out.println("|                                             All Students                                                                 |");
-        System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
+        System.out.println("│" + Main.padStringMiddle("Display All Students",122)+"│");
+        System.out.println("+==========================================================================================================================+");
         System.out.println("| Student ID           | Student Name                        | Enrolled Subjects                                           |");
         System.out.println("+--------------------------------------------------------------------------------------------------------------------------+");
 
